@@ -1,11 +1,9 @@
 import streamlit as st
 import joblib
 
-# Load model and vectorizer
 model = joblib.load("model_LR_bow.pkl")
 vectorizer = joblib.load("vectorizer.pkl")
 
-# Emotion label mapping
 label_map = {
     0: 'sadness',
     1: 'anger',
@@ -15,10 +13,8 @@ label_map = {
     5: 'joy'
 }
 
-# Set page config
-st.set_page_config(page_title="Emotion Predictor", layout="wide")
+st.set_page_config(page_title="Sentiment Analyzer",page_icon = "🧠",layout="wide")
 
-# Apply advanced centered and fullscreen style
 st.markdown("""
     <style>
     body {
@@ -69,14 +65,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Title section
-st.markdown("<h1 style='text-align:center;'>🎯 Emotion Predictor</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center;'>🎯 Sentiment Analyzer</h1>",  unsafe_allow_html=True)
 st.markdown("<p style='font-size: 20px; text-align: center; margin-bottom: 2rem; color: #333;'>Enter a sentence to detect the emotion using machine learning.</p>", unsafe_allow_html=True)
 
-# Input text box
 text = st.text_area("✍️ Enter your sentence here:", height=160)
 
-# Prediction logic
 if st.button("🔍 Predict"):
     if text.strip() == "":
         st.warning("⚠️ Please enter a valid sentence.")
@@ -89,10 +82,8 @@ if st.button("🔍 Predict"):
             'surprise': "😲", 'fear': "😨", 'joy': "😊"
         }
 
-        # Display result
         st.markdown(f"<div class='emoji'>{emoji_dict.get(emotion, '')}</div>", unsafe_allow_html=True)
         st.markdown(f"<div class='emotion-title'>Predicted Emotion: <strong>{emotion.capitalize()}</strong></div>", unsafe_allow_html=True)
 
-# Footer
 st.markdown("<hr>", unsafe_allow_html=True)
 st.caption("Developed by Afshal Liaquat | [GitHub](https://github.com/afshalliaquat)")
